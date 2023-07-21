@@ -3,3 +3,10 @@
 <h1><%= @ticket.title %></h1>
 
 <p><%= @ticket.description %></p>
+
+
+<h2>Comments</h2>
+ <%= render @ticket.comments %>
+
+<h2>Add a comment:</h2>
+<%= render 'comments/form' %>

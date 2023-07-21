@@ -1,0 +1,14 @@
+<%= form_with model: [ @ticket, @ticket.comments.build ] do |form| %>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+
+   <p>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </p>
+  
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
