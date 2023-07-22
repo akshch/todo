@@ -1,6 +1,6 @@
-require 'csv'
-
 class TicketsController < ApplicationController
+
+  before_action :authenticate_user!
 
   def index
     if request.format.csv?
@@ -50,17 +50,13 @@ class TicketsController < ApplicationController
   end
 
   def process_csv
-    current_user.documents.attach(params[:document])
-    csv_data = current_user.documents.last.download
-      CSV.parse(csv_data, headers: true) do |row|
-        Ticket.create!(
-          title: row['title'],
-          description: row['description'],
-          status: row['status'].to_i,
-          user_id: current_user.id
-        )
-      end
-      redirect_to tickets_path, notice: 'CSV data was successfully processed and inserted.'
+    document = current_user.documents.attach(params[:document])
+    if document
+      FeedTicketWorker.perform_async(current_user.id)
+      redirect_to tickets_path, notice: 'Pushed to sidekiq will take some time. Refresh after interval-base on no of Tickets'
+    else
+      render :index
+    end
   end
 
   def set_status
