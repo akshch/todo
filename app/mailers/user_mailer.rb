@@ -10,4 +10,11 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'All Tickets Data Export')
   end
 
+  def password_email
+    @user = params[:user]
+    @password = params[:password]
+    @url  = 'http://localhost:3000/users/sign_in'
+    mail(to: @user.email,  subject: 'Your Password for Login')
+  end
+
 end

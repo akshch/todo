@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     password = Devise.friendly_token.first(10)
     @user.password = password
     if @user.save
+      UserMailer.with(user: @user, password: password).password_email.deliver_later
       flash[:notice] = 'User was successfully created.'
       redirect_to users_path
     else
