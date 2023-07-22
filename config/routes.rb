@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :tickets do
     member do
       post 'process_csv'
+      put 'set_status'
     end
     resources :comments
   end

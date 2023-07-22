@@ -4,5 +4,5 @@ class Ticket < ApplicationRecord
 
   validates :title, :description, presence: true
 
-  enum status: { in_progres: 0, completed: 2 }
+  enum status: { in_progress: 0, completed: 1 }
 end

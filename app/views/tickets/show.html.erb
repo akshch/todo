@@ -4,6 +4,11 @@
 
 <p><%= @ticket.description %></p>
 
+<p>Status: <%= @ticket.status.titlecase %></p>
+
+<span id="ticket_status">
+  <%= render "status", ticket: @ticket %>
+</span>
 
 <h2>Comments</h2>
  <%= render @ticket.comments %>
