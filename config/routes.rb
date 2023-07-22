@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   end
 
   resources :tickets do
+    member do
+      post 'process_csv'
+    end
     resources :comments
   end
   root 'tickets#index'

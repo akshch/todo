@@ -4,6 +4,17 @@
 
 <br />
 <%= link_to "New Ticket", new_ticket_path %>
+<%= link_to "Export Ticket to CSV", tickets_path(format: 'csv'), class: '' %>
+<%= link_to "Iport Ticket to CSV", tickets_path(format: 'csv'), class: '' %>
+
+<%= form_with url: process_csv_ticket_path(@tickets), method: :post do |f|%>
+	<div class="col-sm-8 col-md-10 nopaddingRight">
+    <%= f.file_field 'document'%>
+	</div>
+  <div class="col-sm-4 col-md-2">
+    <%= submit_tag "Submit", name: nil %>
+  </div>
+<% end %>
 
 <br /><br />
 
