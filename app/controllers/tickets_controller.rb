@@ -63,6 +63,15 @@ class TicketsController < ApplicationController
       redirect_to tickets_path, notice: 'CSV data was successfully processed and inserted.'
   end
 
+  def set_status
+    @ticket = Ticket.find_by(id: params[:id])
+    if params[:remove].present?
+      @ticket.in_progress!
+    else
+      @ticket.completed!
+    end
+  end
+
   private
 
   def to_csv
