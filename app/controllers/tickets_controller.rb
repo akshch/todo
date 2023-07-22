@@ -16,7 +16,6 @@ class TicketsController < ApplicationController
 
   def create
     @ticket = Ticket.new(ticket_params)
-    @ticket.user_id = current_user.id
     if @ticket.save
       flash[:notice] = "Ticket created successfully"
       redirect_to tickets_path
@@ -83,6 +82,6 @@ class TicketsController < ApplicationController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:title, :description)
+    params.require(:ticket).permit(:title, :description, :user_id)
   end
 end

@@ -16,6 +16,14 @@
   </div>
 
   <div>
+    <%= form.label :developer %><br>
+    <%= form.select :user_id, options_for_select(User.developer.map { |u| [u.email, u.id] }), required: true  %>
+    <% ticket.errors.full_messages_for(:user_id).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
