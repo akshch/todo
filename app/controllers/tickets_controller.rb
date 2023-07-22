@@ -4,7 +4,7 @@ class TicketsController < ApplicationController
 
   def index
     if request.format.csv?
-      send_data to_csv, filename: "Tickets_#{Time.now.strftime('%d-%b-%Y_%I-%M')}.csv"
+      send_data to_csv
     else
       @tickets = Ticket.all
     end
@@ -72,12 +72,14 @@ class TicketsController < ApplicationController
 
   def to_csv
     columns_caption = ['Id', 'Title', 'Description', 'Status', 'Created At']
-    CSV.generate(headers: true) do |csv|
+    csv_data = CSV.generate(headers: true) do |csv|
       csv << columns_caption
       Ticket.all.find_each do |item|
         csv << [item.id, item.title, item.description, item.status.titlecase, item.created_at.strftime('%Y/%m/%d')]
       end
     end
+    current_user.documents.attach(io: StringIO.new(csv_data), filename: 'data.csv', content_type: 'text/csv')
+    UserMailer.send_data_as_csv(current_user.id).deliver_now
   end
 
   def ticket_params
