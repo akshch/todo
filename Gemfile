@@ -60,3 +60,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "devise", "~> 4.9"
 
 gem "sidekiq", "~> 7.1"
+gem 'bootstrap', '~> 5.3.0.alpha3'
