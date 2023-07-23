@@ -38,12 +38,13 @@ class TicketsController < ApplicationController
       flash[:notice] = "Ticket updated successfully"
       redirect_to @ticket
     else
-      render :edit, status: unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @ticket = Ticket.find_by(id: params[:id])
+    @ticket.destroy
     flash[:notice] = "Ticket deleted successfully"
     redirect_to tickets_path, status: :see_other
   end
