@@ -3,11 +3,12 @@
 <h1>All Tickets</h1>
 
 <br />
-<%= link_to "New Ticket", new_ticket_path, class: 'btn btn-primary' %>
-<%= link_to "Export Ticket to CSV", tickets_path(format: 'csv'), class: 'btn btn-primary' %>
+<% unless current_user.developer? %>
+  <%= link_to "New Ticket", new_ticket_path, class: 'btn btn-primary' %>
+  <%= link_to "Export Ticket to CSV", tickets_path(format: 'csv'), class: 'btn btn-primary' %>
 
-<%= render "import_tickets", tickets: @tickets %>
-
+  <%= render "import_tickets", tickets: @tickets %>
+<% end %>
 
 <br /><br />
 
@@ -28,8 +29,10 @@
          <td><%= ticket.description %></td>
         <td><%= ticket.status.titlecase %></td>
         <td><%= link_to 'Show', ticket, class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Edit', edit_ticket_path(ticket), class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+        <% unless current_user.developer? %>
+        <td><%= link_to 'Edit', edit_ticket_path(ticket), class: 'btn btn-primary'  %></td>
+        <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'  %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

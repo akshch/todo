@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :check_admin
 
   def index
     @users = User.all
@@ -26,6 +26,12 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:email, :role)
+  end
+
+  def check_admin
+    return if current_user.admin?
+
+    redirect_to root_path, notice: "You don't have access to this page"
   end
 
 end

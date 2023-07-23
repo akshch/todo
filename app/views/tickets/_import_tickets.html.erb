@@ -1,9 +1,11 @@
+<div style='margin-left: 78%;'>
 <%= form_with url: process_csv_ticket_path(tickets), method: :post do |f|%>
-	<div class="field">
+	<div >
   <%= f.label :import_tickets %>
-    <%= f.file_field 'document', class: 'form-control' %>
-	</div>
-  <div class="field">
+  <%= f.file_field 'document', class: 'form-control' %>
+	</div><br>
+  <div >
     <%= f.submit "Submit", class: 'btn btn-primary' %>
   </div>
 <% end %>
+</div>
