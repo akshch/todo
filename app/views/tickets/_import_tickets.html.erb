@@ -1,0 +1,9 @@
+<%= form_with url: process_csv_ticket_path(tickets), method: :post do |f|%>
+	<div class="field">
+  <%= f.label :import_tickets %>
+    <%= f.file_field 'document', class: 'form-control' %>
+	</div>
+  <div class="field">
+    <%= f.submit "Submit", class: 'btn btn-primary' %>
+  </div>
+<% end %>

@@ -10,7 +10,7 @@
   <div>
     <%= form.label :role %><br>
     <br>
-     <%= form.collection_select(:role, User.roles.map{ |a| [a[0], a[0].titleize] },  :first, :second, { prompt: "Select Status" },:class=>"form-control search_user_option") %>
+     <%= form.collection_select(:role, User.roles.map{ |a| [a[0], a[0].titleize] },  :first, :second, { prompt: "Select Role" },:class=>"form-control") %>
     <% user.errors.full_messages_for(:role).each do |message| %>
       <div><%= message %></div>
     <% end %>
