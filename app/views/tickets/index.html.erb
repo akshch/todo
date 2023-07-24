@@ -17,6 +17,7 @@
     <tr>
       <th>Title</th>
       <th>Description</th>
+      <th>Assigned To</th>
       <th>Status</th>
       <th colspan="3">Actions</th>
     </tr>
@@ -26,7 +27,8 @@
     <% @tickets.each do |ticket| %>
       <tr>
         <td><%= ticket.title %></td>
-         <td><%= ticket.description %></td>
+        <td><%= ticket.description %></td>
+        <td><%= ticket.user.email %></td>
         <td><%= ticket.status.titlecase %></td>
         <td><%= link_to 'Show', ticket, class: 'btn btn-primary' %></td>
         <% unless current_user.developer? %>

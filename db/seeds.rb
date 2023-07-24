@@ -7,5 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 ['developer', 'sprint_master', 'admin'].each do |name|
-  User.create(email: "#{name}@gmail.com", password: 'password', role: User.roles["#{name}"])
+  user = User.create(email: "#{name}@gmail.com", password: 'password', role: User.roles["#{name}"])
+  user.confirm
 end
