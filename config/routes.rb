@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       post 'process_csv'
       put 'set_status'
     end
+    get 'generate_csv_data', on: :collection
     resources :comments
   end
   root 'tickets#index'

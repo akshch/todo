@@ -2,13 +2,10 @@ require 'csv'
 class TicketsController < ApplicationController
 
   before_action :authenticate_user!
+  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 
   def index
-    if request.format.csv?
-      send_data to_csv
-    else
-      @tickets = Ticket.all
-    end
+    @tickets = Ticket.includes(:user, :comments).order('tickets.created_at desc')
   end
 
   def new
@@ -26,15 +23,12 @@ class TicketsController < ApplicationController
   end
 
   def show
-    @ticket = Ticket.find_by(id: params[:id])
   end
 
   def edit
-    @ticket = Ticket.find_by(id: params[:id])
   end
 
   def update
-    @ticket = Ticket.find_by(id: params[:id])
     if @ticket.update(ticket_params)
       flash[:notice] = "Ticket updated successfully"
       redirect_to @ticket
@@ -44,7 +38,6 @@ class TicketsController < ApplicationController
   end
 
   def destroy
-    @ticket = Ticket.find_by(id: params[:id])
     @ticket.destroy
     flash[:notice] = "Ticket deleted successfully"
     redirect_to tickets_path, status: :see_other
@@ -69,9 +62,7 @@ class TicketsController < ApplicationController
     end
   end
 
-  private
-
-  def to_csv
+  def generate_csv_data
     columns_caption = ['Id', 'Title', 'Description', 'Status', 'Created At']
     csv_data = CSV.generate(headers: true) do |csv|
       csv << columns_caption
@@ -81,9 +72,16 @@ class TicketsController < ApplicationController
     end
     current_user.documents.attach(io: StringIO.new(csv_data), filename: 'data.csv', content_type: 'text/csv')
     UserMailer.send_data_as_csv(current_user.id).deliver_now
+    redirect_to tickets_path, notice: 'Attchement has been sent to you email'
   end
+
+  private
 
   def ticket_params
     params.require(:ticket).permit(:title, :description, :user_id)
+  end
+
+  def set_ticket
+    @ticket = Ticket.find_by(id: params[:id])
   end
 end

@@ -5,7 +5,7 @@
 <br />
 <% unless current_user.developer? %>
   <%= link_to "New Ticket", new_ticket_path, class: 'btn btn-primary' %>
-  <%= link_to "Export Ticket to CSV", tickets_path(format: 'csv'), class: 'btn btn-primary' %>
+  <%= link_to "Export Ticket to CSV", generate_csv_data_tickets_path, class: 'btn btn-primary' %>
 
   <%= render "import_tickets", tickets: @tickets %>
 <% end %>
@@ -15,6 +15,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+     <th>ID</th>
       <th>Title</th>
       <th>Description</th>
       <th>Assigned To</th>
@@ -26,6 +27,7 @@
   <tbody>
     <% @tickets.each do |ticket| %>
       <tr>
+       <td><%= ticket.id %></td>
         <td><%= ticket.title %></td>
         <td><%= ticket.description %></td>
         <td><%= ticket.user.email %></td>
