@@ -16,7 +16,7 @@
         </li>
         <li class="nav-item">
           <p class="nav-link"><span class="material-symbols-outlined">notifications</span>
-          <span class="notification-counter"><%= current_user.tickets.count %></span></p>
+          <span class="notification-counter"><%= ticket_count(current_user)%></span></p>
         </li>
         <li class="nav-item">
           <%= link_to 'Home', root_path,  class: "nav-link" %>
