@@ -1,8 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @ticket.title %></h1>
+<p>
+<strong>Title:</strong>
+<%= @ticket.title %>
+</p>
 
-<p>Description: <%= @ticket.description %></p>
+<p>
+<strong>Description:</strong>
+<%= @ticket.description %>
+</p>
 
 <div>
 Status:
@@ -10,9 +16,9 @@ Status:
     <%= render "status", ticket: @ticket %>
   </span>
 </div>
-
-<h2>Comments</h2>
+<br>
+<h4>Comments</h4>
  <%= render @ticket.comments %>
 
-<h2>Add a comment:</h2>
+<strong>Add a comment:</strong>
 <%= render 'comments/form' %>

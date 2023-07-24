@@ -1,6 +1,5 @@
 <%= form_with model: [ @ticket, @ticket.comments.build ] do |form| %>
   <p>
-    <%= form.label :body %><br>
     <%= form.text_area :body, class: 'form-control' %>
   </p>
 
