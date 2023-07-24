@@ -3,22 +3,11 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
+* Ruby version - 3.0.1 and Rails Version - 6.1.7.2
+* System dependencies - Redis, Postgresql
 * Database creation
-
-* Database initialization
-
-* How to run the test suite
-
+* `rails db:create db:migrate db:seed`
 * Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+  `rails server`
+  `redis-server`
+  `bundle exec sidekiq`
