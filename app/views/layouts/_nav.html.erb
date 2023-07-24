@@ -12,7 +12,11 @@
         </li>
       <% else %><li>
         <li class="nav-item">
-          <P class="nav-link"><%= current_user.email.split('@')[0].titlecase %></p>
+          <p class="nav-link"><%= current_user.email.split('@')[0].titlecase %></p>
+        </li>
+        <li class="nav-item">
+          <p class="nav-link"><span class="material-symbols-outlined">notifications</span>
+          <span class="notification-counter"><%= current_user.tickets.count %></span></p>
         </li>
         <li class="nav-item">
           <%= link_to 'Home', root_path,  class: "nav-link" %>
