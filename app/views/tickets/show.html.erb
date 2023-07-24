@@ -2,13 +2,14 @@
 
 <h1><%= @ticket.title %></h1>
 
-<p><%= @ticket.description %></p>
+<p>Description: <%= @ticket.description %></p>
 
-<p>Status: <%= @ticket.status.titlecase %></p>
-
-<span id="ticket_status">
-  <%= render "status", ticket: @ticket %>
-</span>
+<div>
+Status:
+  <span id="ticket_status">
+    <%= render "status", ticket: @ticket %>
+  </span>
+</div>
 
 <h2>Comments</h2>
  <%= render @ticket.comments %>

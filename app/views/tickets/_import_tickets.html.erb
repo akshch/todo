@@ -1,10 +1,10 @@
-<div style='margin-left: 78%;'>
+<div style='margin-left: 78%; margin-top: -62px;'>
 <%= form_with url: process_csv_ticket_path(tickets), method: :post do |f|%>
 	<div >
   <%= f.label :import_tickets %>
-  <%= f.file_field 'document', class: 'form-control' %>
+<%= f.file_field 'document', class: 'form-control', style: 'width: 80%' %>
 	</div><br>
-  <div >
+  <div>
     <%= f.submit "Submit", class: 'btn btn-primary' %>
   </div>
 <% end %>

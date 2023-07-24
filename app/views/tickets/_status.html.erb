@@ -1,5 +1,7 @@
 <% if ticket.in_progress? %>
-  <%= link_to "Change", set_status_ticket_path(ticket.id), method: :put, remote: true, data: {confirm: "Are you sure you want to mark this ticket as Completed?"}, class: "create_btn" %>
+  <%= @ticket.status.titlecase %>
+  <%= link_to "Change Status", set_status_ticket_path(ticket.id), method: :put, remote: true, data: {confirm: "Are you sure you want to mark this ticket as Completed?"}, class: "create_btn" %>
 <% else %>
+  <%= @ticket.status.titlecase %>
   <%= link_to "Change Status", set_status_ticket_path(ticket.id, remove: 1), method: :put, remote: true, data: {confirm: "Are you sure you want mark it as in progress ticket?"}, class: "create_btn" %>
 <% end %>
